@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title color="pink">Resultados del Análisis de Pingüinos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='pinguino.png') }}" alt="Imagen de encabezado">
+    </div>
+
+    <h1>Resultados del Análisis de Pingüinos</h1>
+
+    <h2>Método del Codo</h2>
+    <img src="data:image/png;base64,{{ grafico_elbow_codificado }}">
+    <p>Para determinar el número óptimo de clusters, se implementó el metodo del codo, mejor conocido como (Elbow
+        Method). Este método consiste en ejecutar el algoritmo K-Means con diferentes valores de k (numero de clusters)
+        y calcular la suma de las distancias cuadradas de las muestras a sus clusters más cercanos. El punto de
+        inflexión en la curva de inertia indica el número óptimo de clusters. En este caso, el gráfico mostro un codo en
+        k = 3, lo que significa que tres clusters es el número óptimo para este conjunto de datos.</p>
+
+    <h1>Visualizaciones</h1>
+
+    <h2>Clusters de Pingüinos basados en Longitud y Profundidad del Pico</h2>
+    <img src="data:image/png;base64,{{ imagen_codificada }}">
+    <p>Este gráfico muestra los clusters de pingüinos formados por el algoritmo K-Means utilizando la
+        longitud y profundidad del pico como características. Cada punto representa un pingüino, y el color del punto
+        indica el cluster al que fue asignado por el algoritmo entrenado. Se pueden observar tres clusters principales
+        en el grafico, donde los pingüinos dentro de cada cluster tienen características similares de longitud y
+        profundidad del pico.</p>
+
+    <h2>Cantidad de Pingüinos Hembras y Machos en cada Cluster</h2>
+    <img src="data:image/png;base64,{{ grafico_barras_codificado }}">
+    <p>Éste gráfico de barras muestra la cantidad de pingüinos hembras y machos en cada Cluster, se puede observar que
+        el cluster 1 tiene principalmente hembras, el cluster 0 tiene una mezcla mas equilibrada de ambos sexos y el
+        cluster 2 tiene tiene una mayoria de machos.</p>
+
+    <h2>Longitud del Pico vs. Masa Corporal</h2>
+    <img src="data:image/png;base64,{{ grafico_bill_mass_codificado }}">
+    <p>Se puede visualizar en este grafico la relación entre la longitud del pico y la masa corporal de los pingüinos,
+        con los puntos coloreados según el sexo, 0.0 para Macho y 1.0 para Hembra. Existe una correlación positiva entre
+        la longitud del pico y la masa corporal; es decir, a medida que la longitud del pico aumenta, también lo hace la
+        masa corporal.
+    </p>
+
+    <h2>Longitud del Pico vs. Profundidad del Pico</h2>
+    <img src="data:image/png;base64,{{ grafico_bill_depth_codificado }}">
+    <p>En esta gráfica se permite observar el comportamiento de estas variables en función del sexo de los pingüinos.
+        Siendo 0.0 macho y 1.0 hembra, se puede notar que los picos mas cortos y menos profundos los ocupan en mayor
+        medida los puntos verdes, o sea las hembras y los picos más largos y profundos estan más densamente poblados por
+        puntos azules, lo que significa que son mas Machos los que tienden a tener dichos picos de esa forma, haciendo
+        sentido al diformismo sexual de esta especie.</p>
+
+    <h2>Masa Corporal por Cluster</h2>
+    <img src="data:image/png;base64,{{ grafico_masa_codificado }}">
+    <p>Este gráfico muestra la distribución de la masa corporal para cada uno de los clusters identificados, podemos
+        notar que el cluster 0 tiene una masa corporal mediana alrededor de 4500 g, con un rango que se extiende
+        aproximadamente de 4000 g a 5000 g, el cluster 1 tiene una masa corporal más baja, con una mediana alrededor de
+        3500 g y un rango de aproximadamente 3000 g a 4000 g y el cluster 2 presenta la mayor masa corporal, con una
+        mediana cerca de 5500 g y un rango de aproximadamente 5000 g a 6000 g.</p>
+
+    <h1>Métricas de evaluación</h1>
+    <p> Despues de aplicar el algoritmo de clustering y obtener los clusters es fundamental evaluar la calidad y
+        coherencia de los resultados. Esto se puede lograr aplicando evaluaciones y métricas específicas como lo son:
+    </p>
+
+    <h2>Coeficiente de Silueta</h2>
+    <p>El coeficiente de silueta es: {{ silhouette_coefficient }}</p>
+
+    <h2>Índice Calinski-Harabasz</h2>
+    <p>El índice Calinski-Harabasz es: {{ ch_score }}</p>
+
+    <h2>Conclusión</h2>
+    <p>El análisis realizado demuestra que el algoritmo K-Means ha segmentado efectivamente los datos en clusters bien
+        definidos y separados. Las métricas de evaluación validan la calidad del producto obtenido, este enfoque permite
+        una mejor comprensión de las similitudes y diferencias entre las distintas especies de pingüinos.</p>
+
+</body>
+
+</html>
